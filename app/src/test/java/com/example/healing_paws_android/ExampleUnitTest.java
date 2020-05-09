@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.healing_paws_android;
 
 import org.junit.Test;
 
