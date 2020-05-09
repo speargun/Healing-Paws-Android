@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">海玲袍斯</string>
+    <string name="translate">Translate</string>
+    <string name="welcome">欢迎来到海玲袍斯</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="or">or</string>
+    <string name="register">注册</string>
+    <string name="repeat_password">再次输入密码</string>
+    <string name="email">邮箱</string>
+    <string name="phone_number">手机号码</string>
+    <string name="birthday">出生日期</string>
+    <string name="address">住址</string>
+    <string name="rules">我遵守本网站条款</string>
+    <string name="pet">宠物</string>
+    <string name="location">选择地点</string>
+    <string name="beijing">北京</string>
+    <string name="shanghai">上海</string>
+    <string name="chengdu">成都</string>
+    <string name="type">什么类型的预约?</string>
+    <string name="emergency">紧急</string>
+    <string name="standard">标准</string>
+    <string name="doctor">希望预约哪位医生？</string>
+    <string name="change">你接受调剂吗？</string>
+    <string name="accept">接受</string>
+    <string name="refuse">拒绝</string>
+    <string name="description">描述你宠物的状况</string>
+    <string name="submit">确认并提交</string>
+    <string name="appointment">开始一个新的预约</string>
+    <string name="back">返回</string>
+    <string name="new_appointment">新的预约</string>
+</resources>

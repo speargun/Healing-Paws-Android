@@ -12,21 +12,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/r_t_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:gravity="center"
-            android:text="Register"
-            android:textSize="30dp"
+            android:text="@string/register"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etfname"
+            android:id="@+id/r_et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -34,11 +35,12 @@
             android:layout_marginRight="5dp"
             android:layout_weight="50"
             android:gravity="center"
-            android:hint="Username"
-            android:textSize="20dp" />
+            android:hint="@string/username"
+            android:inputType="text"
+            android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/etage"
+            android:id="@+id/r_et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -46,12 +48,12 @@
             android:layout_marginRight="5dp"
             android:layout_weight="50"
             android:gravity="center"
-            android:hint="Password"
-            android:inputType="number"
-            android:textSize="20dp" />
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/etdd"
+            android:id="@+id/r_et_repeat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
@@ -59,12 +61,12 @@
             android:layout_marginRight="5dp"
             android:layout_weight="39"
             android:gravity="center"
-            android:hint="Repeat Password"
-            android:inputType="date"
-            android:textSize="20dp" />
+            android:hint="@string/repeat_password"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/etyy"
+            android:id="@+id/r_et_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
@@ -72,12 +74,12 @@
             android:layout_marginRight="5dp"
             android:layout_weight="33"
             android:gravity="center"
-            android:hint="Email"
-            android:inputType="date"
-            android:textSize="20dp" />
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/etcity"
+            android:id="@+id/r_et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -85,51 +87,69 @@
             android:layout_marginRight="5dp"
             android:layout_weight="50"
             android:gravity="center"
-            android:hint="Phone Number"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/etpin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="50"
-            android:gravity="center"
-            android:hint="Birthday"
-            android:inputType="number"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/etmobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:gravity="center"
-            android:hint="Address"
+            android:hint="@string/phone_number"
             android:inputType="phone"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/r_et_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:hint="@string/birthday"
+            android:inputType="date"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/r_et_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:hint="@string/address"
+            android:inputType="text"
+            android:textSize="20sp" />
 
         <CheckBox
+            android:id="@+id/r_cb_rules"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I accept the site rules"
-            android:textSize="20dp"
-            />
+            android:text="@string/rules"
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/bregister"
+            android:id="@+id/r_b_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:layout_marginTop="30dp"
-            android:text="Register"
-            android:textSize="25dp"/>
+            android:text="@string/register"
+            android:textSize="20sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/r_b_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/back"
+                android:textSize="17sp"/>
+        </RelativeLayout>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>
