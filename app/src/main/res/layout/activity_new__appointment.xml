@@ -64,7 +64,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beijing"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:checked="true"/>
                 <RadioButton
                     android:id="@+id/n_rb_shanghai"
                     android:layout_width="wrap_content"
@@ -101,7 +102,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/emergency"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:checked="true"/>
                 <RadioButton
                     android:id="@+id/n_rb_standard"
                     android:layout_width="wrap_content"
@@ -147,7 +149,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/accept"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:checked="true"/>
 
                 <RadioButton
                     android:id="@+id/n_rb_refuse"

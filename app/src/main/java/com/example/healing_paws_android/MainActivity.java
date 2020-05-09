@@ -15,17 +15,15 @@ import android.widget.LinearLayout;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private int login_status = 0;//default not logged in
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //translate
         Button translate = (Button) findViewById(R.id.m_b_translate);
-        Button login = (Button) findViewById(R.id.m_b_login);
-        Button register = (Button) findViewById(R.id.m_b_register);
-        Button new_appointment = (Button) findViewById(R.id.m_b_new_appointment);
-
         translate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -48,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //login
+        Button login = (Button) findViewById(R.id.m_b_login);
         login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //register
+        Button register = (Button) findViewById(R.id.m_b_register);
         register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //new_appointment
+        Button new_appointment = (Button) findViewById(R.id.m_b_new_appointment);
         new_appointment.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -74,7 +78,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        Button login = (Button) findViewById(R.id.m_b_login);
+        Button register = (Button) findViewById(R.id.m_b_register);
+        Button new_appointment = (Button) findViewById(R.id.m_b_new_appointment);
+        Intent intent = getIntent();
+        int i = intent.getIntExtra("login_status",0);
+        login_status = i;
+        //set button visibility
+        if(login_status==0){
+            new_appointment.setVisibility(View.INVISIBLE);
+            login.setVisibility(View.VISIBLE);
+            register.setVisibility(View.VISIBLE);
+        }else{
+            new_appointment.setVisibility(View.VISIBLE);
+            login.setVisibility(View.INVISIBLE);
+            register.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
+    }
+
+    public int getlogin_status(){
+        return login_status;
     }
 }
