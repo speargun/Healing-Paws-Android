@@ -1,8 +1,11 @@
 package com.example.healing_paws_android;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ public class Appointment_details extends AppCompatActivity {
         setContentView(R.layout.activity_appointment_details);
         mListView=(ListView)findViewById(R.id.lv);
         mListView.setAdapter(new MyBaseAdapter());
+
     }
     class MyBaseAdapter extends BaseAdapter{
 
