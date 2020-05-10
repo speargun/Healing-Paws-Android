@@ -22,6 +22,12 @@
             android:name=".Login"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
+            android:name=".Appointment_details"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".Check_appointment"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
