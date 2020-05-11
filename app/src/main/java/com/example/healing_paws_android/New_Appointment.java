@@ -74,7 +74,7 @@ public class New_Appointment extends AppCompatActivity {
                     change = "refuse";
                 }
                 String des = String.valueOf(description.getText());
-                String url = "http://47.98.48.168:5000/new_appointment";
+                String url = "http://47.98.48.168:5000/make_appointment";
                 SendMessage(url,pe,location,type,doc,change,des);
             }
         });

@@ -56,7 +56,7 @@ public class Register extends AppCompatActivity {
                 String bir = String.valueOf(birthday.getText());
                 String add = String.valueOf(address.getText());
                 String rul = String.valueOf(rules.isChecked());
-                String url = "http://47.98.48.168:5000/register";
+                String url = "http://47.98.48.168:5000/register?role=c";
                 SendMessage(url,name,pass,rep,ema,pho,bir,add,rul);
             }
         });
