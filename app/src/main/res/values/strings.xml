@@ -30,4 +30,10 @@
     <string name="appointment">Make a New Appointment</string>
     <string name="back">back</string>
     <string name="new_appointment">New Appointment</string>
+    <string name="login_successful">Login Successful</string>
+    <string name="login_failed_password">Wrong Password</string>
+    <string name="login_failed_username">User Does Not Exist</string>
+    <string name="unknown_failure">Unknown Failure</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="logout">Logout</string>
 </resources>
