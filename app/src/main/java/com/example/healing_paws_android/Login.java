@@ -1,9 +1,11 @@
 package com.example.healing_paws_android;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -19,10 +21,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -75,16 +79,25 @@ public class Login extends AppCompatActivity {
                 CheckBox remember_me = findViewById(R.id.l_cb_remember);
                 String name = String.valueOf(username.getText());
                 String pass = String.valueOf(password.getText());
-                Boolean rem = remember_me.isChecked();
-                String url = "http://192.168.1.104:5000/login";
-                loginWithOkHttp(url,name,pass,rem);
+                if(name.equals("")) {
+                    String username_empty = getString(R.string.username_empty);
+                    Toast.makeText(Login.this, username_empty, Toast.LENGTH_SHORT).show();
+
+                } else if(pass.equals("")){
+                    String password_empty = getString(R.string.password_empty);
+                    Toast.makeText(Login.this, password_empty, Toast.LENGTH_SHORT).show();
+                }else {
+                    Boolean rem = remember_me.isChecked();
+                    String url = "http://192.168.1.104:5000/login";
+                    loginWithOkHttp(url, name, pass, rem);
 //                HttpUtil.getUrl(url);    //this is a connection test
+                }
             }
         });
     }
 
-    public void loginWithOkHttp(String address,String username,String password,Boolean remember_me){
-        HttpUtil.loginWithOkHttp(address,username,password,remember_me, new okhttp3.Callback() {
+    public void loginWithOkHttp(String url,String username,String password,Boolean remember_me){
+        HttpUtil.loginWithOkHttp(url,username,password,remember_me, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -95,18 +108,36 @@ public class Login extends AppCompatActivity {
                 });
             }
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 //得到服务器返回的具体内容
                 final String status = parseJsonWithJsonObject(response);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (status.equals("200")){
+                            Headers headers =response.headers();//response为okhttp请求后的响应
+                            List cookies = headers.values("Set-Cookie");
+                            String session = cookies.get(0).toString();
+                            String sessionid = session.substring(0,session.indexOf(";"));
+                            EditText username = findViewById(R.id.l_et_username);
+                            String name = String.valueOf(username.getText());
+                            SharedPreferences share = getSharedPreferences("Session",MODE_PRIVATE);
+                            SharedPreferences username_sp = getSharedPreferences("Username",MODE_PRIVATE);
+                            SharedPreferences.Editor edit = share.edit();
+                            SharedPreferences.Editor user = username_sp.edit();//编辑文件
+                            edit.putString("sessionid",sessionid);
+                            user.putString("username",name);
+                            edit.commit();
+                            user.apply();
+                            //reference https://www.jianshu.com/p/5e1f79c450ff
                             String login_successful = getString(R.string.login_successful);
                             Toast.makeText(Login.this,login_successful,Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this,MainActivity.class);
                             intent.putExtra("login_status",1);
                             startActivity(intent);
+                        }else if(status.equals("400")){
+                            String login_invalid = getString(R.string.login_failed_invalid);
+                            Toast.makeText(Login.this,login_invalid,Toast.LENGTH_SHORT).show();
                         }else if(status.equals("403")){
                             String login_failed = getString(R.string.login_failed_password);
                             Toast.makeText(Login.this,login_failed,Toast.LENGTH_SHORT).show();
@@ -126,10 +157,10 @@ public class Login extends AppCompatActivity {
 
     private String parseJsonWithJsonObject(Response response) throws IOException {
         String responseData=response.body().string();
-        System.out.println(responseData);
         responseData = responseData.replace('[','{');
         responseData = responseData.replace(',',':');
         responseData = responseData.replace(']','}');
+        System.out.println(responseData);
             String status="";
         try{
             JSONObject jsonObject=new JSONObject(responseData);

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                     configuration.locale = Locale.ENGLISH;
                     getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
                     Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                    intent.putExtra("login_status",login_status);
                     startActivity(intent);
                 }else{
                     Locale.setDefault(Locale.CHINESE);
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     configuration.locale = Locale.CHINESE;
                     getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
                     Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                    intent.putExtra("login_status",login_status);
                     startActivity(intent);
                 }
             }

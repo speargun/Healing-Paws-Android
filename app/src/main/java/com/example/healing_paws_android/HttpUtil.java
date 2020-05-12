@@ -1,6 +1,7 @@
 package com.example.healing_paws_android;
 //this is a class to realize specific interaction with server
 //reference https://www.cnblogs.com/HenuAJY/p/10884055.html
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -16,23 +17,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 class HttpUtil {
     //login
     static void loginWithOkHttp(String address,String username,String password,Boolean remember_me, okhttp3.Callback callback){
-        final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
-        OkHttpClient client = new OkHttpClient.Builder()
-                .cookieJar(new CookieJar() {
-                    @Override
-                    public void saveFromResponse(HttpUrl httpUrl, List<Cookie> list) {
-                        cookieStore.put(httpUrl.host(), list);
-                    }
-
-                    @Override
-                    public List<Cookie> loadForRequest(HttpUrl httpUrl) {
-                        List<Cookie> cookies = cookieStore.get(httpUrl.host());
-                        return cookies != null ? cookies : new ArrayList<Cookie>();
-                    }
-                }).build();
+        OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("username",username)
                 .add("password",password)
@@ -42,8 +32,8 @@ class HttpUtil {
                 .url(address)
                 .post(body)
                 .build();
-        System.out.println(request);
-        System.out.println(body.toString());
+//        System.out.println(request);
+//        System.out.println(body.toString());
         client.newCall(request).enqueue(callback);
     }
     //this is a connection test
@@ -62,16 +52,21 @@ class HttpUtil {
 //        }
 //    }
     //register
-//    static void registerWithOkHttp(String address,String account,String password,okhttp3.Callback callback){
-//        OkHttpClient client = new OkHttpClient();
-//        RequestBody body = new FormBody.Builder()
-//                .add("registerAccount",account)
-//                .add("registerPassword",password)
-//                .build();
-//        Request request = new Request.Builder()
-//                .url(address)
-//                .post(body)
-//                .build();
-//        client.newCall(request).enqueue(callback);
-//    }
+    static void registerWithOkHttp(String url, String username, String password, String repeat, String email, String phone, String birthday, String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("username",username)
+                .add("email",email)
+                .add("phone",phone)
+                .add("dob",birthday)
+                .add("address",address)
+                .add("password",password)
+                .add("password2",repeat)
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 }
