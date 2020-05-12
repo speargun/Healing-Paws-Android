@@ -36,4 +36,18 @@
     <string name="unknown_failure">Unknown Failure</string>
     <string name="remember_me">Remember Me</string>
     <string name="logout">Logout</string>
+    <string name="register_successful">Register Successful</string>
+    <string name="username_empty">Username Cannot Be Empty</string>
+    <string name="password_empty">Password Cannot Be Empty</string>
+    <string name="register_failed">Register Failed</string>
+    <string name="username_invalid">Invalid Username</string>
+    <string name="password_invalid">Invalid Password</string>
+    <string name="email_invalid">Invalid Email</string>
+    <string name="phone_invalid">Invalid Phone</string>
+    <string name="deny_rules">You Must Accept the Site Rules</string>
+    <string name="username_duplicate">Duplicate Username</string>
+    <string name="reserve_successful">Reservation Successful</string>
+    <string name="reserve_failed">Reservation Failed</string>
+    <string name="pet_empty">You Have No Pets Registered Yet. Please Register At Least One Pet.</string>
+    <string name="login_failed_invalid">Invalid Account</string>
 </resources>
