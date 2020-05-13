@@ -50,4 +50,5 @@
     <string name="reserve_failed">Reservation Failed</string>
     <string name="pet_empty">You Have No Pets Registered Yet. Please Register At Least One Pet.</string>
     <string name="login_failed_invalid">Invalid Account</string>
+    <string name="sql_error">There is something wrong with the database. Please try again.</string>
 </resources>
