@@ -88,7 +88,8 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, password_empty, Toast.LENGTH_SHORT).show();
                 }else {
                     Boolean rem = remember_me.isChecked();
-                    String url = "http://192.168.1.104:5000/login";
+                    String url = "http://47.98.48.168:5000/login";
+//                    String url = "http://192.168.1.104:5000/login";
                     loginWithOkHttp(url, name, pass, rem);
 //                HttpUtil.getUrl(url);    //this is a connection test
                 }
