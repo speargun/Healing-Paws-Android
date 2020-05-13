@@ -118,8 +118,7 @@ public class Register extends AppCompatActivity {
                     String deny_rules = getString(R.string.deny_rules);
                     Toast.makeText(Register.this, deny_rules, Toast.LENGTH_SHORT).show();
                 } else {
-                    String url = "http://47.98.48.168:5000/register?role=c";
-//                    String url = "http://192.168.1.104:5000/register?role=c";
+                    String url = "http://47.98.48.168:5000/register_android";
                     RegisterWithOkHttp(url, name, pass, rep, ema, pho, bir, add);
                 }
             }
