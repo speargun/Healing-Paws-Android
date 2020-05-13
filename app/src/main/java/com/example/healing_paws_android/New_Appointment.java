@@ -39,9 +39,9 @@ public class New_Appointment extends AppCompatActivity {
 
         //fill pets and doctors in spinners
         Spinner pet = findViewById(R.id.n_s_pet);
-        ArrayList<String> petsList = new ArrayList<>();
+        final ArrayList<String> petsList = new ArrayList<>();
         Spinner doctor = findViewById(R.id.n_s_doctor);
-        ArrayList<String> doctorsList = new ArrayList<>();
+        final ArrayList<String> doctorsList = new ArrayList<>();
         try {
             acquire_info(petsList,doctorsList);
         }catch(SQLException e){
@@ -112,7 +112,11 @@ public class New_Appointment extends AppCompatActivity {
                 RadioButton accept = findViewById(R.id.n_rb_accept);
                 RadioButton refuse = findViewById(R.id.n_rb_refuse);
                 EditText description = findViewById(R.id.n_et_description);
-                String pe = String.valueOf(pet.getId());
+                String pe = null;
+                if(pet.getSelectedItem()!=null) {
+                    pe = pet.getSelectedItem().toString();
+                }
+//                System.out.println("the selected pet is: "+pe);
                 int location = 1;
                 if(beijing.isChecked()){
                     location = 1;
@@ -127,7 +131,11 @@ public class New_Appointment extends AppCompatActivity {
                 }else{
                     type = 0;
                 }
-                String doc = String.valueOf(doctor.getId());
+                String doc = null;
+                if(doctor.getSelectedItem()!=null) {
+                    doc = doctor.getSelectedItem().toString();
+                }
+//                System.out.println("the selected doctor is: "+doc);
                 int change = 1;
                 if(accept.isChecked()){
                     change = 1;
@@ -135,7 +143,7 @@ public class New_Appointment extends AppCompatActivity {
                     change = 0;
                 }
                 String des = String.valueOf(description.getText());
-                if(pe.isEmpty()){
+                if(pe==null){
                     String pet_empty = getString(R.string.pet_empty);
                     Toast.makeText(New_Appointment.this,pet_empty,Toast.LENGTH_SHORT).show();
                 }else {
