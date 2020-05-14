@@ -68,6 +68,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button profile = findViewById(R.id.profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Profile.class);
+                startActivity(intent);
+            }
+        });
+
+        Button question = findViewById(R.id.question);
+        question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Question.class);
+                startActivity(intent);
+            }
+        });
+
         //new_appointment
         Button new_appointment = findViewById(R.id.m_b_new_appointment);
         new_appointment.setOnClickListener(new View.OnClickListener(){
