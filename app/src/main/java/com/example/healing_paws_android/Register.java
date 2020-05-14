@@ -132,7 +132,8 @@ public class Register extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(Register.this, "server error", Toast.LENGTH_SHORT).show();
+                        String server_error = getString(R.string.server_error);
+                        Toast.makeText(Register.this, server_error, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -5,7 +5,7 @@
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="login">登录</string>
-    <string name="or">or</string>
+    <string name="or">或者</string>
     <string name="register">注册</string>
     <string name="repeat_password">再次输入密码</string>
     <string name="email">邮箱</string>
@@ -51,4 +51,5 @@
     <string name="pet_empty">您还没有注册宠物。请至少注册一只宠物。</string>
     <string name="login_failed_invalid">无效账户</string>
     <string name="sql_error">数据库出了点状况。请重试。</string>
+    <string name="server_error">服务器错误</string>
 </resources>
