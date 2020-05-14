@@ -103,7 +103,8 @@ public class Login extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(Login.this, "server error", Toast.LENGTH_SHORT).show();
+                        String server_error = getString(R.string.server_error);
+                        Toast.makeText(Login.this, server_error, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
