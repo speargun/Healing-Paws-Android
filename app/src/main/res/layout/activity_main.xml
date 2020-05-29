@@ -16,64 +16,70 @@
         android:text="@string/welcome"
         android:textSize="30sp" />
 
+
     <Button
         android:id="@+id/m_b_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/m_t_welcome"
+        android:layout_marginTop="-1dp"
         android:background="@drawable/buttonshape"
-        android:text="@string/login"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/m_t_welcome"/>
+        android:text="@string/login" />
 
     <Button
         android:id="@+id/m_b_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/m_b_login"
+        android:layout_marginTop="-128dp"
         android:background="@drawable/buttonshape"
-        android:text="@string/register"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/m_b_login"/>
+        android:text="@string/register" />
 
     <Button
         android:id="@+id/m_b_new_appointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/m_b_register"
+        android:layout_marginTop="302dp"
         android:background="@drawable/buttonshape"
-        android:text="@string/new_appointment"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/m_b_register"/>
+        android:text="@string/new_appointment" />
+
+    <Button
+        android:id="@+id/m_b_my_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_b_register"
+        android:layout_marginTop="102dp"
+        android:background="@drawable/buttonshape"
+        android:text="my_appointment" />
 
     <Button
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/m_b_new_appointment"
+        android:layout_marginTop="-174dp"
         android:background="@drawable/buttonshape"
-        android:text="QUESTION"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/m_b_new_appointment"/>
+        android:text="QUESTION" />
 
     <Button
         android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/question"
+        android:layout_marginTop="13dp"
         android:background="@drawable/buttonshape"
-        android:text="PROFILE"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/question"/>
+        android:text="PROFILE" />
 
     <Button
         android:id="@+id/m_b_translate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonshape"
-        android:text="@string/translate"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="104dp"
+        android:background="@drawable/buttonshape"
+        android:text="@string/translate" />
 
 </RelativeLayout>

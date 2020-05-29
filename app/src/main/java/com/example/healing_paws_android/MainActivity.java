@@ -95,6 +95,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        Button my_appointment = findViewById(R.id.m_b_my_appointment);
+        my_appointment.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this,Check_appointment.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -103,15 +115,18 @@ public class MainActivity extends AppCompatActivity {
         Button login = findViewById(R.id.m_b_login);
         Button register = findViewById(R.id.m_b_register);
         Button new_appointment = findViewById(R.id.m_b_new_appointment);
+        Button my_appointment = findViewById(R.id.m_b_my_appointment);
         Intent intent = getIntent();
         int i = intent.getIntExtra("login_status",0);
         login_status = i;
         //set button visibility
         if(login_status==0){
             new_appointment.setVisibility(View.INVISIBLE);
+            my_appointment.setVisibility(View.INVISIBLE);
             register.setVisibility(View.VISIBLE);
         }else{
             new_appointment.setVisibility(View.VISIBLE);
+            my_appointment.setVisibility(View.VISIBLE);
             String logout = this.getString(R.string.logout);
             login.setText(logout);
             login = findViewById(R.id.m_b_login);
