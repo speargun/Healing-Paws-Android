@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         Button register = findViewById(R.id.m_b_register);
         Button new_appointment = findViewById(R.id.m_b_new_appointment);
         Button my_appointment = findViewById(R.id.m_b_my_appointment);
+        Button question = findViewById(R.id.question);
+        Button profile = findViewById(R.id.profile);
         Intent intent = getIntent();
         int i = intent.getIntExtra("login_status",0);
         login_status = i;
@@ -123,10 +125,14 @@ public class MainActivity extends AppCompatActivity {
         if(login_status==0){
             new_appointment.setVisibility(View.INVISIBLE);
             my_appointment.setVisibility(View.INVISIBLE);
+            question.setVisibility(View.INVISIBLE);
+            profile.setVisibility(View.INVISIBLE);
             register.setVisibility(View.VISIBLE);
         }else{
             new_appointment.setVisibility(View.VISIBLE);
             my_appointment.setVisibility(View.VISIBLE);
+            question.setVisibility(View.VISIBLE);
+            profile.setVisibility(View.VISIBLE);
             String logout = this.getString(R.string.logout);
             login.setText(logout);
             login = findViewById(R.id.m_b_login);

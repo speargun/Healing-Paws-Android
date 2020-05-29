@@ -14,6 +14,7 @@ public class appointmentdata {
         this.dname = dname;
     }
 
+
     public String getDname() {
         return dname;
     }
@@ -36,7 +37,16 @@ public class appointmentdata {
     }
 
 
-}
+
+
+
+
+
+
+
+
+    }
+
 
 
 

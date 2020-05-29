@@ -26,7 +26,7 @@ public class Check_appointment extends AppCompatActivity {
         setContentView(R.layout.activity_check_appointment);
         mListView=(ListView)findViewById(R.id.lv);
         List<appointmentdata> mappointmentdataList=new ArrayList<>();
-        for( int i = 1; i <= 100 ; i++) {
+        for( int i = 1; i <= 5 ; i++) {
             appointmentdata mappointmentData = new appointmentdata();
             mappointmentData.setDname("doctor: " + mappointmentData.getDname());
             mappointmentData.setAddress("address:"+ mappointmentData.getAddress());

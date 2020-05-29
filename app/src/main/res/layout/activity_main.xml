@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/m_t_welcome"
-        android:layout_marginTop="-1dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/buttonshape"
         android:text="@string/login" />
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/m_b_login"
-        android:layout_marginTop="-128dp"
+        android:layout_marginTop="-118dp"
         android:background="@drawable/buttonshape"
         android:text="@string/register" />
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/m_b_register"
-        android:layout_marginTop="302dp"
+        android:layout_marginTop="257dp"
         android:background="@drawable/buttonshape"
         android:text="@string/new_appointment" />
 
@@ -49,16 +49,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/m_b_register"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="333dp"
         android:background="@drawable/buttonshape"
-        android:text="my_appointment" />
+        android:text="my appointment" />
 
     <Button
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/m_b_new_appointment"
-        android:layout_marginTop="-174dp"
+        android:layout_marginTop="-104dp"
         android:background="@drawable/buttonshape"
         android:text="QUESTION" />
 
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/question"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="138dp"
         android:background="@drawable/buttonshape"
         android:text="PROFILE" />
 
@@ -77,8 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="284dp"
         android:background="@drawable/buttonshape"
         android:text="@string/translate" />
 

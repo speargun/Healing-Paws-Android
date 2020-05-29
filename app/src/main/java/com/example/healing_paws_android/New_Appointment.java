@@ -256,5 +256,7 @@ public class New_Appointment extends AppCompatActivity {
         rs1.close();
         st.close();
         conn.close();
+
     }
+
 }
