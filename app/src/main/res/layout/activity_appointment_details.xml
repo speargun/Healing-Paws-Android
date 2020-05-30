@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ListView
+
+    <TextView
+        android:id="@+id/pet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lv"
-        />
-
+        android:text="TextView" />
 
     <TextView
-        android:id="@+id/text_dname"
-        android:layout_width="50dp"
+        android:id="@+id/location"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="30dp" />
+        android:text="TextView" />
 
     <TextView
-        android:id="@+id/text_address"
-        android:layout_width="50dp"
+        android:id="@+id/change"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="30dp" />
+        android:text="TextView" />
 
     <TextView
-        android:id="@+id/text_time"
-        android:layout_width="50dp"
+        android:id="@+id/doctor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="30dp" />
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="back" />
+</LinearLayout>
