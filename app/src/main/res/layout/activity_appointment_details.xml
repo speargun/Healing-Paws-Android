@@ -7,47 +7,62 @@
         android:id="@+id/pet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/pet"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/loc"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/doctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/doc"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/desc"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/ty"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/time"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="back" />
+        android:text="@string/back"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>

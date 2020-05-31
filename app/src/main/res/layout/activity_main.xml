@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/m_t_welcome"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
         android:background="@drawable/buttonshape"
         android:text="@string/login" />
@@ -31,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/m_b_login"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="-118dp"
         android:background="@drawable/buttonshape"
         android:text="@string/register" />
@@ -51,7 +53,7 @@
         android:layout_below="@id/m_b_register"
         android:layout_marginTop="333dp"
         android:background="@drawable/buttonshape"
-        android:text="my appointment" />
+        android:text="@string/my_appointment" />
 
     <Button
         android:id="@+id/question"
@@ -60,7 +62,7 @@
         android:layout_below="@+id/m_b_new_appointment"
         android:layout_marginTop="-104dp"
         android:background="@drawable/buttonshape"
-        android:text="QUESTION" />
+        android:text="@string/question" />
 
     <Button
         android:id="@+id/profile"
@@ -69,7 +71,7 @@
         android:layout_below="@+id/question"
         android:layout_marginTop="138dp"
         android:background="@drawable/buttonshape"
-        android:text="PROFILE" />
+        android:text="@string/profile" />
 
     <Button
         android:id="@+id/m_b_translate"
