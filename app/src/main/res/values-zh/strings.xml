@@ -53,4 +53,12 @@
     <string name="login_failed_invalid">无效账户</string>
     <string name="sql_error">数据库出了点状况。请重试。</string>
     <string name="server_error">服务器错误</string>
+    <string name="question">提问</string>
+    <string name="profile">用户信息</string>
+    <string name="time">时间</string>
+    <string name="loc">地点</string>
+    <string name="doc">医生</string>
+    <string name="desc">描述</string>
+    <string name="ty">类型</string>
+    <string name="ch">调剂</string>
 </resources>

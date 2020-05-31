@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
@@ -53,37 +55,26 @@ import java.util.Map;
 
 import static android.view.View.inflate;
 
-
-
-
 public class Check_appointment extends AppCompatActivity {
-
-    private ListView mListView;
-
-    final ArrayList<String> petsList = new ArrayList<>();
-
-    final ArrayList<String> timeList = new ArrayList<>();
-
-
-    final String[] pets = new String[petsList.size()];
-
-    final String[] time = new String[petsList.size()];
-
-
-
     //  private int[] icons={R.drawable.jd,R.drawable.tmall,R.drawable.sina,R.drawable.qq_dizhu,R.drawable.qq,R.drawable.uc};
     @Override
-
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_appointment);
 
+        final ArrayList<String> petsList = new ArrayList<>();
+        final ArrayList<String> timeList = new ArrayList<>();
 
+        Button back = findViewById(R.id.ca_b_back);
 
-
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Check_appointment.this,MainActivity.class);
+                intent.putExtra("login_status",1);
+                startActivity(intent);
+            }
+        });
 
         try {
             acquire_info(petsList,timeList);
@@ -93,97 +84,72 @@ public class Check_appointment extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        int i = 0;
-        while(i<petsList.size()){
-            pets[i] = petsList.get(i);
-
-            i++;
+        final ArrayList<Appointment> appointmentList = new ArrayList<>();
+        for(int i = 0;i<petsList.size();i++){
+            Appointment a = new Appointment(petsList.get(i),timeList.get(i));
+            appointmentList.add(i,a);
         }
 
-        i = 0;
-        while(i<timeList.size()){
-            time[i] = timeList.get(i);
-
-            i++;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        mListView=(ListView)findViewById(R.id.lv);
-        mListView.setAdapter(new MyBaseAdapter());
-
-
-
+        Adapter adapter = new Adapter(Check_appointment.this, R.layout.list_item, appointmentList);
+        ListView mListView=(ListView)findViewById(R.id.lv);
+        mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                TextView atime = (TextView) view.findViewById(R.id.tv_list);
-
+                Intent intent = new Intent(Check_appointment.this,Appointment_details.class);
+                TextView atime = view.findViewById(R.id.tv_list2);
                 intent.putExtra("atime",atime.getText().toString());
-
-                intent = new Intent(Check_appointment.this,Appointment_details.class);
                 startActivity(intent);
             }
         });
-
-
-
-
-
     }
 
-
-
-
-
-    class MyBaseAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return time.length;
+    class Appointment {
+        private String pet_name;
+        private String datetime;
+        Appointment(String pn, String dt){
+            pet_name=pn;
+            datetime=dt;
         }
-        @Override
-        public Object getItem(int position) {
-            return time [position];
+
+        public String getDatetime() {
+            return datetime;
         }
-        @Override
-        public long getItemId(int position) {
-            return position;
+
+        public String getPet_name() {
+            return pet_name;
         }
+
+        public void setDatetime(String datetime) {
+            this.datetime = datetime;
+        }
+
+        public void setPet_name(String pet_name) {
+            this.pet_name = pet_name;
+        }
+    }
+
+    class Adapter extends ArrayAdapter<Appointment> {
+        private int layoutId;
+        Adapter(Context c, int id, List<Appointment> f){
+            super(c,id,f);
+            layoutId = id;
+        }
+
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {//组装数据
-            View view=View.inflate(Check_appointment.this,R.layout.list_item,null);//在list_item中有两个id,现在要把他们拿过来
-            TextView mTextView=(TextView) view.findViewById(R.id.tv_list);
-            //ImageView imageView=(ImageView)view.findViewById(R.id.image);
-//组件一拿到，开始组装
-            mTextView.setText(time[position]);
-            //imageView.setBackgroundResource(icons[position]);
-//组装玩开始返回
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
+            Appointment appointment = getItem(position);
+            View view = LayoutInflater.from(getContext()).inflate(layoutId,parent,false);
+            if(appointment != null) {
+                TextView tv1 = view.findViewById(R.id.tv_list1);
+                tv1.setText(appointment.pet_name);
+                TextView tv2 = view.findViewById(R.id.tv_list2);
+                tv2.setText(appointment.datetime);
+            }
             return view;
-
         }
-
-
-
     }
-
-
-
-
-
-
 
     public void acquire_info(ArrayList<String> pets,ArrayList<String> time) throws SQLException {
 
@@ -208,7 +174,7 @@ public class Check_appointment extends AppCompatActivity {
                 "    pets AS p,\n" +
                 "    users AS u\n" +
                 "WHERE\n" +
-                "    p.owner_id = u.id AND has datetime AND u.username = '"+username+"';");
+                "    p.owner_id = u.id AND u.username = '"+username+"';");
         while (rs.next()) {
             pets.add(rs.getString(1));
         }
@@ -217,24 +183,20 @@ public class Check_appointment extends AppCompatActivity {
         ResultSet rs1 = st.executeQuery("SELECT \n" +
                 "    datetime\n" +
                 "FROM\n" +
-               "appointments As a\n"+
+                "    appointments AS a,\n" +
                 "    pets AS p,\n" +
                 "    users AS u\n" +
                 "WHERE\n" +
-                " a.pet_id = p.id AND p.owner_id = u.id AND u.username = '"+username+"';");
+                "    a.pet_id = p.id AND p.owner_id = u.id AND u.username = '"+username+"';");
         while (rs1.next()) {
 //            System.out.println(rs1.getString(1));
-            time.add(rs1.getString(1));
+            String s = rs1.getString(1);
+            s = s.substring(0, s.length()-2);
+            time.add(s);
         }
         // 关闭资源
         rs1.close();
-
-
-
         st.close();
         conn.close();
-
     }
-
-
 }
