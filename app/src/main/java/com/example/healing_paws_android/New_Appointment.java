@@ -200,13 +200,14 @@ public class New_Appointment extends AppCompatActivity {
         st.executeQuery("use test");
         st.execute("INSERT INTO\n" +
                 "                    appointments\n" +
-                        "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime)\n" +
+                        "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime,status)\n" +
                         "                VALUES\n" +
                         "                ('"+description+"',"+location+","+type+","+change+",\n" +
                         "                (SELECT id from Pets\n" +
                         "                WHERE name = '"+pet+"'),\n" +
                         "                (SELECT id from Users\n" +
-                        "                WHERE username = '"+doctor+"'),'"+time+"');");
+                        "                WHERE username = '"+doctor+"'),'"+time+"')\n" +
+                        "                'pending';");
         // 获得结果 集合
         // 关闭资源
         st.close();
