@@ -43,6 +43,7 @@ public class Appointment_details extends AppCompatActivity {
         TextView description = findViewById(R.id.description);
         TextView type = findViewById(R.id.type);
         TextView time = findViewById(R.id.time);
+        TextView pet_status = findViewById(R.id.pet_status);
 
         Button back = findViewById(R.id.back);
 
@@ -61,7 +62,7 @@ public class Appointment_details extends AppCompatActivity {
         });
 
         try {
-            details(pet, location, change, doctor, description, type, atime);
+            details(pet, location, change, doctor, description, type, atime, pet_status);
         }catch(SQLException e){
             String sql_error = getString(R.string.sql_error);
             Toast.makeText(Appointment_details.this,sql_error,Toast.LENGTH_SHORT).show();
@@ -69,7 +70,7 @@ public class Appointment_details extends AppCompatActivity {
         }
     }
 
-    public void details(TextView pet, TextView location, TextView change, TextView doctor, TextView description, TextView type, String time) throws SQLException{
+    public void details(TextView pet, TextView location, TextView change, TextView doctor, TextView description, TextView type, String time, TextView pet_status) throws SQLException{
         // 注册驱动
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -191,8 +192,10 @@ public class Appointment_details extends AppCompatActivity {
                 "    a.pet_id = p.id AND p.owner_id = u.id\n" +
                 "        AND u.username = '"+username+"'\n" +
                 "        AND a.datetime = '"+time+"';");
+        String a = "";
         while(rs5.next()) {
             s = rs5.getString(1);
+            a = s;
         }
         if(s.equals("1")){
             s = getString(R.string.emergency);
@@ -202,6 +205,24 @@ public class Appointment_details extends AppCompatActivity {
         s = getString(R.string.ty)+" "+s;
         type.setText(s);
         rs5.close();
+        if(a.equals("1")){
+            ResultSet rs6 = st.executeQuery("SELECT \n" +
+                    "    pet_status\n" +
+                    "FROM\n" +
+                    "    appointments AS a,\n" +
+                    "    pets AS p,\n" +
+                    "    users AS u\n" +
+                    "WHERE\n" +
+                    "    a.pet_id = p.id AND p.owner_id = u.id\n" +
+                    "        AND u.username = '"+username+"'\n" +
+                    "        AND a.datetime = '"+time+"';");
+            while(rs6.next()) {
+                s = rs6.getString(1);
+            }
+            s = getString(R.string.ps)+" "+s;
+            pet_status.setText(s);
+            rs6.close();
+        }
         st.close();
         conn.close();
 
