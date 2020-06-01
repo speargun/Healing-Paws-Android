@@ -83,7 +83,7 @@ public class Check_appointment extends AppCompatActivity {
             Toast.makeText(Check_appointment.this,sql_error,Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        
+
         final ArrayList<Appointment> appointmentList = new ArrayList<>();
         for(int i = 0;i<petsList.size();i++){
             Appointment a = new Appointment(petsList.get(i),timeList.get(i));
