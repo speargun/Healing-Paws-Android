@@ -198,15 +198,29 @@ public class New_Appointment extends AppCompatActivity {
         int second = calendar.get(Calendar.SECOND);
         String time = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
         st.executeQuery("use test");
-        st.execute("INSERT INTO\n" +
-                "                    appointments\n" +
-                        "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime)\n" +
-                        "                VALUES\n" +
-                        "                ('"+description+"',"+location+","+type+","+change+",\n" +
-                        "                (SELECT id from Pets\n" +
-                        "                WHERE name = '"+pet+"'),\n" +
-                        "                (SELECT id from Users\n" +
-                        "                WHERE username = '"+doctor+"'),'"+time+"');");
+        if(type==0) {
+            st.execute("INSERT INTO\n" +
+                    "                    appointments\n" +
+                    "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime,status)\n" +
+                    "                VALUES\n" +
+                    "                ('" + description + "'," + location + "," + type + "," + change + ",\n" +
+                    "                (SELECT id from Pets\n" +
+                    "                WHERE name = '" + pet + "'),\n" +
+                    "                (SELECT id from Users\n" +
+                    "                WHERE username = '" + doctor + "'),'" + time + "',\n" +
+                    "                'Pending');");
+        }else{
+            st.execute("INSERT INTO\n" +
+                    "                    appointments\n" +
+                    "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime,status,pet_status)\n" +
+                    "                VALUES\n" +
+                    "                ('" + description + "'," + location + "," + type + "," + change + ",\n" +
+                    "                (SELECT id from Pets\n" +
+                    "                WHERE name = '" + pet + "'),\n" +
+                    "                (SELECT id from Users\n" +
+                    "                WHERE username = '" + doctor + "'),'" + time + "',\n" +
+                    "                'Pending', 'Checked');");
+        }
         // 获得结果 集合
         // 关闭资源
         st.close();
@@ -244,10 +258,9 @@ public class New_Appointment extends AppCompatActivity {
         ResultSet rs1 = st.executeQuery("SELECT DISTINCT\n" +
                 "    username\n" +
                 "FROM\n" +
-                "    users AS u,\n" +
-                "    employees AS e\n" +
+                "    users\n" +
                 "WHERE\n" +
-                "    u.id = e.id;");
+                "    is_customer = 0;");
         while (rs1.next()) {
 //            System.out.println(rs1.getString(1));
             doctors.add(rs1.getString(1));
@@ -256,5 +269,7 @@ public class New_Appointment extends AppCompatActivity {
         rs1.close();
         st.close();
         conn.close();
+
     }
+
 }

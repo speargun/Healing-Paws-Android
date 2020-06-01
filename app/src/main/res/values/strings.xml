@@ -30,6 +30,7 @@
     <string name="appointment">Make a New Appointment</string>
     <string name="back">back</string>
     <string name="new_appointment">New Appointment</string>
+    <string name="my_appointment">My Appointment</string>
     <string name="login_successful">Login Successful</string>
     <string name="login_failed_password">Wrong Password</string>
     <string name="login_failed_username">User Does Not Exist</string>
@@ -51,4 +52,14 @@
     <string name="pet_empty">You Have No Pets Registered Yet. Please Register At Least One Pet.</string>
     <string name="login_failed_invalid">Invalid Account</string>
     <string name="sql_error">There is something wrong with the database. Please try again.</string>
+    <string name="server_error">Server Error</string>
+    <string name="question">QUESTION</string>
+    <string name="profile">PROFILE</string>
+    <string name="time">time</string>
+    <string name="loc">location</string>
+    <string name="doc">Doctor</string>
+    <string name="desc">Description</string>
+    <string name="ty">Type</string>
+    <string name="ch">Change</string>
+    <string name="ps">Pet Status</string>
 </resources>

@@ -97,13 +97,18 @@ public class Question extends AppCompatActivity {
         // 执行
         st.executeQuery("use test");
         for(int id=0; id<=100;id++){
-            //无法根据用户名确定用户提过的所有问题
-           // ResultSet rs = st.executeQuery("SELECT title FROM questions LEFT JOIN  users ON users.id WHERE id ="+ id +"username= '"+username+"';");
-           // String q = rs.toString();
-         //   if(q !=null){
-           //     questionList.add(q);
-         //   }
-          //  rs.close();
+            ResultSet rs = st.executeQuery("SELECT \n" +
+                    "    *\n" +
+                    "FROM\n" +
+                    "    questions AS q,\n" +
+                    "    users AS u\n" +
+                    "WHERE\n" +
+                    "    q.user_id = u.id AND u.username = '"+username+"';");
+            String q = rs.toString();
+            if(q !=null){
+                questionList.add(q);
+            }
+            rs.close();
         }
         st.close();
         conn.close();

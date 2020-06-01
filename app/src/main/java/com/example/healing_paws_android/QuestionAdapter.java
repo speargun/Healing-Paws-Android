@@ -19,7 +19,7 @@ public class QuestionAdapter extends ArrayAdapter<String> {
     public View gitView(int position, View convertView, ViewGroup parent){
         String q =(String) getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
-        TextView s = view.findViewById(R.id.textView2);
+        TextView s = view.findViewById(R.id.text_dname);
         s.setText(q);
         return view;
     }
