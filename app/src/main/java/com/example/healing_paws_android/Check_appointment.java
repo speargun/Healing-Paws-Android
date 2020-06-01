@@ -83,7 +83,7 @@ public class Check_appointment extends AppCompatActivity {
             Toast.makeText(Check_appointment.this,sql_error,Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-
+        
         final ArrayList<Appointment> appointmentList = new ArrayList<>();
         for(int i = 0;i<petsList.size();i++){
             Appointment a = new Appointment(petsList.get(i),timeList.get(i));
@@ -91,7 +91,7 @@ public class Check_appointment extends AppCompatActivity {
         }
 
         Adapter adapter = new Adapter(Check_appointment.this, R.layout.list_item, appointmentList);
-        ListView mListView=(ListView)findViewById(R.id.lv);
+        ListView mListView=findViewById(R.id.lv);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -169,33 +169,22 @@ public class Check_appointment extends AppCompatActivity {
         // 执行
         st.executeQuery("use test");
         ResultSet rs = st.executeQuery("SELECT \n" +
-                "    name\n" +
-                "FROM\n" +
-                "    pets AS p,\n" +
-                "    users AS u\n" +
-                "WHERE\n" +
-                "    p.owner_id = u.id AND u.username = '"+username+"';");
-        while (rs.next()) {
-            pets.add(rs.getString(1));
-        }
-        rs.close();
-
-        ResultSet rs1 = st.executeQuery("SELECT \n" +
-                "    datetime\n" +
+                "    name,datetime\n" +
                 "FROM\n" +
                 "    appointments AS a,\n" +
                 "    pets AS p,\n" +
                 "    users AS u\n" +
                 "WHERE\n" +
                 "    a.pet_id = p.id AND p.owner_id = u.id AND u.username = '"+username+"';");
-        while (rs1.next()) {
+        while (rs.next()) {
 //            System.out.println(rs1.getString(1));
-            String s = rs1.getString(1);
+            pets.add(rs.getString(1));
+            String s = rs.getString(2);
             s = s.substring(0, s.length()-2);
             time.add(s);
         }
         // 关闭资源
-        rs1.close();
+        rs.close();
         st.close();
         conn.close();
     }
