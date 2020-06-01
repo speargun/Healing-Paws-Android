@@ -206,8 +206,8 @@ public class New_Appointment extends AppCompatActivity {
                         "                (SELECT id from Pets\n" +
                         "                WHERE name = '"+pet+"'),\n" +
                         "                (SELECT id from Users\n" +
-                        "                WHERE username = '"+doctor+"'),'"+time+"')\n" +
-                        "                'pending';");
+                        "                WHERE username = '"+doctor+"'),'"+time+"',\n" +
+                        "                'Pending');");
         // 获得结果 集合
         // 关闭资源
         st.close();
