@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +19,25 @@ import java.sql.Statement;
 import javax.xml.transform.Result;
 
 public class Answer extends AppCompatActivity {
-    private TextView Title = findViewById(R.id.title1);
-    private TextView Body = findViewById(R.id.body1);
-    private TextView Answer = findViewById(R.id.answer1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
+        TextView Title = findViewById(R.id.title1);
+        TextView Body = findViewById(R.id.body1);
+        TextView Answer = findViewById(R.id.answer1);
+
+        Button back = findViewById(R.id.an_b_back);
+
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Answer.this,Question.class);
+                intent.putExtra("login_status",1);
+                startActivity(intent);
+            }
+        });
 
         Intent i2 = getIntent();
         String title =i2.getStringExtra("title");
@@ -53,16 +66,23 @@ public class Answer extends AppCompatActivity {
                     "    questions\n" +
                     "WHERE\n" +
                     "    title = '"+title+"';");
-            Body.setText(rs.toString());
+            while(rs.next()) {
+                Body.setText(rs.getString(1));
+            }
+
+            rs.close();
 
             ResultSet rs1 = st.executeQuery("SELECT \n" +
-                    "    answers\n" +
+                    "    a.body\n" +
                     "FROM\n" +
-                    "    questions\n" +
+                    "    answers AS a, questions AS q\n" +
                     "WHERE\n" +
-                    "    title = '"+title+"';");
-            Answer.setText(rs1.toString());
+                    "    a.question_id = q.id AND q.title = '"+title+"';");
+            while(rs1.next()) {
+                Answer.setText(rs1.getString(1));
+            }
 
+            rs1.close();
 
         }catch(SQLException e){
             String sql_error = getString(R.string.sql_error);

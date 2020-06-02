@@ -62,4 +62,15 @@
     <string name="ty">Type</string>
     <string name="ch">Change</string>
     <string name="ps">Pet Status</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="send">Send</string>
+    <string name="answer">Answer</string>
+    <string name="employee">Employee</string>
+    <string name="other">Other</string>
+    <string name="anonymity">Anonymity</string>
+    <string name="question_type">Question Type</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="send_success">Send Successful</string>
 </resources>

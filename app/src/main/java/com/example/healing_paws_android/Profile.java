@@ -19,20 +19,19 @@ import java.sql.Statement;
 
 public class Profile extends AppCompatActivity {
 
-    private TextView name = findViewById(R.id.username);
-    private TextView phone = findViewById(R.id.phone);
-    private TextView email = findViewById(R.id.email);
-    private TextView dob = findViewById(R.id.dob);
-    private TextView address = findViewById(R.id.address);
-    private Button back = findViewById(R.id.back);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        TextView name = findViewById(R.id.username);
+        TextView phone = findViewById(R.id.phone);
+        TextView email = findViewById(R.id.email);
+        TextView dob = findViewById(R.id.dob);
+        TextView address = findViewById(R.id.address);
+        Button back = findViewById(R.id.back);
 
         try {
-            profile();
+            profile(name, phone, email, dob, address);
         }catch(SQLException e){
             String sql_error = getString(R.string.sql_error);
             Toast.makeText(Profile.this,sql_error,Toast.LENGTH_SHORT).show();
@@ -50,7 +49,7 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    public void profile() throws SQLException{
+    public void profile(TextView name, TextView phone, TextView email, TextView dob, TextView address) throws SQLException{
         // 注册驱动
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -67,14 +66,13 @@ public class Profile extends AppCompatActivity {
 
         st.executeQuery("use test");
         name.setText(username);
-        ResultSet rs = st.executeQuery("SELECT phone FROM customers LEFT JOIN  users ON users.id WHERE username= '"+username+"';");
-        phone.setText(rs.toString());
-        rs = st.executeQuery("SELECT email FROM customers LEFT JOIN  users ON users.id WHERE username= '"+username+"';");
-        email.setText(rs.toString());
-        rs = st.executeQuery("SELECT dob FROM customers LEFT JOIN  users ON users.id WHERE username= '"+username+"';");
-        dob.setText(rs.toString());
-        rs = st.executeQuery("SELECT address FROM customers LEFT JOIN  users ON users.id WHERE username= '"+username+"';");
-        address.setText(rs.toString());
+        ResultSet rs = st.executeQuery("SELECT phone, email, dob, address FROM customers LEFT JOIN  users ON users.id WHERE username= '"+username+"';");
+        while (rs.next()) {
+            phone.setText(rs.getString(1));
+            email.setText(rs.getString(2));
+            dob.setText(rs.getString(3));
+            address.setText(rs.getString(4));
+        }
 
         rs.close();
         st.close();

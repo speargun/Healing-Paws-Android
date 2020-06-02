@@ -11,7 +11,7 @@ import java.util.List;
 
 public class QuestionAdapter extends ArrayAdapter<String> {
     private int resourceId;
-    public QuestionAdapter(Context context, int textViewResourceId, List<String> objects){
+    QuestionAdapter(Context context, int textViewResourceId, List<String> objects){
         super(context,textViewResourceId,objects);
         resourceId = textViewResourceId;
     }

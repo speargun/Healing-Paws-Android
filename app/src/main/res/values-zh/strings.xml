@@ -62,4 +62,15 @@
     <string name="ty">类型</string>
     <string name="ch">调剂</string>
     <string name="ps">宠物状态</string>
+    <string name="title">标题</string>
+    <string name="body">内容</string>
+    <string name="send">发送</string>
+    <string name="answer">答复</string>
+    <string name="employee">员工</string>
+    <string name="other">其他</string>
+    <string name="anonymity">匿名</string>
+    <string name="question_type">问题类型</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="send_success">发送成功</string>
 </resources>
