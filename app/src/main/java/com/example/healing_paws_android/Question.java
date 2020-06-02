@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -109,18 +110,24 @@ public class Question extends AppCompatActivity {
         // 获得链接
         Connection conn = DriverManager.getConnection("jdbc:mysql://47.98.48.168:3306", "root", "root");
         // 得到操作数据库sql语句的对象Statement
-        Statement st = conn.createStatement();
+        PreparedStatement st = null;
         SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);
         // 执行
-        st.executeQuery("use test");
-        ResultSet rs = st.executeQuery("SELECT \n" +
+        String sql = "use test";
+        st = conn.prepareStatement(sql);
+        st.execute();
+
+        sql = "SELECT \n" +
                 "    title\n" +
                 "FROM\n" +
                 "    questions AS q,\n" +
                 "    users AS u\n" +
                 "WHERE\n" +
-                "    q.user_id = u.id AND u.username = '"+username+"';");
+                "    q.user_id = u.id AND u.username = ?;";
+        st = conn.prepareStatement(sql);
+        st.setString(1,username);
+        ResultSet rs = st.executeQuery();
         while(rs.next()){
             questionList.add(rs.getString(1));
         }
@@ -143,13 +150,18 @@ public class Question extends AppCompatActivity {
             // 获得链接
             Connection conn = DriverManager.getConnection("jdbc:mysql://47.98.48.168:3306", "root", "root");
             // 得到操作数据库sql语句的对象Statement
-            Statement st = conn.createStatement();
+            PreparedStatement st = null;
             SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
             String username = sharedPreferences.getString("username",null);
             // 执行
-            st.executeQuery("use test");
+            String sql = "use test";
+            st = conn.prepareStatement(sql);
+            st.execute();
 
-            ResultSet rs1 = st.executeQuery("Select id FROM users WHERE username =  '"+username+"';");
+            sql ="Select id FROM users WHERE username =  ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1,username);
+            ResultSet rs1 = st.executeQuery();
             int user_id = -1;
             while(rs1.next()) {
                 user_id = Integer.parseInt(rs1.getString(1));
@@ -194,7 +206,15 @@ public class Question extends AppCompatActivity {
             int second = calendar.get(Calendar.SECOND);
             String time = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
 
-            st.execute("INSERT INTO questions (title, type, body, timestamp, anonymity, user_id, counta) VALUES ('" + t + "','" + type + "','"+ b + "','"+ time+ "','"+ anonymity + "','" + user_id + "', '0');" );
+            sql = "INSERT INTO questions (title, type, body, timestamp, anonymity, user_id, counta) VALUES (?,?,?,?,?,?,'0');";
+            st = conn.prepareStatement(sql);
+            st.setString(1,t);
+            st.setInt(2,type);
+            st.setString(3,b);
+            st.setString(4,time);
+            st.setInt(5,anonymity);
+            st.setInt(6,user_id);
+            st.executeUpdate();
             st.close();
             conn.close();
 

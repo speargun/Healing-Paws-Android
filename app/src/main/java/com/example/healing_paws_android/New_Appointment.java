@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import java.sql.Connection;
@@ -40,29 +41,152 @@ public class New_Appointment extends AppCompatActivity {
         //fill pets and doctors in spinners
         Spinner pet = findViewById(R.id.n_s_pet);
         final ArrayList<String> petsList = new ArrayList<>();
-        Spinner doctor = findViewById(R.id.n_s_doctor);
+        final Spinner doctor = findViewById(R.id.n_s_doctor);
         final ArrayList<String> doctorsList = new ArrayList<>();
+        final ArrayList<String> locsList = new ArrayList<>();
         try {
-            acquire_info(petsList,doctorsList);
+            acquire_info(petsList,doctorsList,locsList);
         }catch(SQLException e){
             String sql_error = getString(R.string.sql_error);
             Toast.makeText(New_Appointment.this,sql_error,Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         final String[] pets = new String[petsList.size()];
-        final String[] doctors = new String[doctorsList.size()];
+        final String[] locs = new String[locsList.size()];
         int i = 0;
         while(i<petsList.size()){
             pets[i] = petsList.get(i);
 //            System.out.println(pets[i]);
             i++;
         }
+
         i = 0;
-        while(i<doctorsList.size()){
-            doctors[i] = doctorsList.get(i);
-//            System.out.println(doctors[i]);
+        while(i<locsList.size()){
+            locs[i] = locsList.get(i);
+//            System.out.println(locs[i]);
             i++;
         }
+        i = 0;
+        int j = 0;
+        while(i<doctorsList.size()){
+            if(locs[i].equals("1")) {
+                j++;
+            }
+            i++;
+        }
+        i = 0;
+        final String[] doctors1 = new String[j];
+        while(i<doctorsList.size()) {
+            if(locs[i].equals("1")) {
+                doctors1[i] = doctorsList.get(i);
+            }
+            i++;
+        }
+        RadioButton beijing = findViewById(R.id.n_rb_beijing);
+        RadioButton shanghai = findViewById(R.id.n_rb_shanghai);
+        RadioButton chengdu = findViewById(R.id.n_rb_chengdu);
+        beijing.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int i = 0;
+                int j = 0;
+                int[] i_set = new int[doctorsList.size()];
+                while(i<doctorsList.size()){
+                    if(locs[i].equals("1")) {
+                        i_set[j] = i;
+                        j++;
+                    }
+                    i++;
+                }
+                i = 0;
+                final String[] doctors = new String[j];
+                while(i<doctors.length) {
+                    doctors[i] = doctorsList.get(i_set[i]);
+                    i++;
+                }
+                ArrayAdapter adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_template,doctors){
+                    @Override
+                    public View getDropDownView(int position, View convertView,
+                                                ViewGroup parent) {
+                        View view = inflate(getContext(), R.layout.spinner_dropdown, null);
+                        TextView label = view.findViewById(R.id.spinner_item_label);
+                        label.setText(doctors[position]);
+                        return view;
+                    }
+                };
+//        System.out.println("doctors: "+doctors[0]);
+                doctor.setAdapter(adapter);
+            }
+        });
+        shanghai.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int i = 0;
+                int j = 0;
+                int[] i_set = new int[doctorsList.size()];
+                while(i<doctorsList.size()){
+                    if(locs[i].equals("2")) {
+                        i_set[j] = i;
+                        j++;
+                    }
+                    i++;
+                }
+                i = 0;
+                final String[] doctors = new String[j];
+                while(i<doctors.length) {
+                    doctors[i] = doctorsList.get(i_set[i]);
+                    i++;
+                }
+                ArrayAdapter adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_template,doctors){
+                    @Override
+                    public View getDropDownView(int position, View convertView,
+                                                ViewGroup parent) {
+                        View view = inflate(getContext(), R.layout.spinner_dropdown, null);
+                        TextView label = view.findViewById(R.id.spinner_item_label);
+                        label.setText(doctors[position]);
+                        return view;
+                    }
+                };
+//        System.out.println("doctors: "+doctors[0]);
+                doctor.setAdapter(adapter);
+            }
+        });
+        chengdu.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int i = 0;
+                int j = 0;
+                int[] i_set = new int[doctorsList.size()];
+                while(i<doctorsList.size()){
+                    if(locs[i].equals("3")) {
+                        i_set[j] = i;
+                        j++;
+                    }
+                    i++;
+                }
+                i = 0;
+                final String[] doctors = new String[j];
+                while(i<doctors.length) {
+                    doctors[i] = doctorsList.get(i_set[i]);
+                    i++;
+                }
+                ArrayAdapter adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_template,doctors){
+                    @Override
+                    public View getDropDownView(int position, View convertView,
+                                                ViewGroup parent) {
+                        View view = inflate(getContext(), R.layout.spinner_dropdown, null);
+                        TextView label = view.findViewById(R.id.spinner_item_label);
+                        label.setText(doctors[position]);
+                        return view;
+                    }
+                };
+//        System.out.println("doctors: "+doctors[0]);
+                doctor.setAdapter(adapter);
+            }
+        });
+
+
+
         ArrayAdapter adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_template,pets){
             @Override
             public View getDropDownView(int position, View convertView,
@@ -75,13 +199,13 @@ public class New_Appointment extends AppCompatActivity {
         };
 // reference       https://www.cnblogs.com/coding-way/p/3549865.html
         pet.setAdapter(adapter);
-        adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_template,doctors){
+        adapter=new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_template,doctors1){
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
                 View view = inflate(getContext(), R.layout.spinner_dropdown, null);
                 TextView label = view.findViewById(R.id.spinner_item_label);
-                label.setText(doctors[position]);
+                label.setText(doctors1[position]);
                 return view;
             }
         };
@@ -116,6 +240,10 @@ public class New_Appointment extends AppCompatActivity {
                 if(pet.getSelectedItem()!=null) {
                     pe = pet.getSelectedItem().toString();
                 }
+                String doct = null;
+                if(doctor.getSelectedItem()!=null) {
+                    doct = doctor.getSelectedItem().toString();
+                }
 //                System.out.println("the selected pet is: "+pe);
                 int location = 1;
                 if(beijing.isChecked()){
@@ -146,6 +274,9 @@ public class New_Appointment extends AppCompatActivity {
                 if(pe==null){
                     String pet_empty = getString(R.string.pet_empty);
                     Toast.makeText(New_Appointment.this,pet_empty,Toast.LENGTH_SHORT).show();
+                }else if(doct==null) {
+                    String doctor_empty = getString(R.string.doctor_empty);
+                    Toast.makeText(New_Appointment.this,doctor_empty,Toast.LENGTH_SHORT).show();
                 }else {
                     try {
                         new_Appointment(pe, location, type, doc, change, des);
@@ -176,7 +307,7 @@ public class New_Appointment extends AppCompatActivity {
         // 获得链接
         Connection conn = DriverManager.getConnection("jdbc:mysql://47.98.48.168:3306", "root", "root");
         // 得到操作数据库sql语句的对象Statement
-        Statement st = conn.createStatement();
+        PreparedStatement st = null;
         SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);
         // 执行
@@ -197,37 +328,49 @@ public class New_Appointment extends AppCompatActivity {
 //秒
         int second = calendar.get(Calendar.SECOND);
         String time = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
-        st.executeQuery("use test");
+        String sql = "use test;";
+        st = conn.prepareStatement(sql);
+        st.execute();
         if(type==0) {
-            st.execute("INSERT INTO\n" +
+            sql = "INSERT INTO\n" +
                     "                    appointments\n" +
                     "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime,status)\n" +
                     "                VALUES\n" +
-                    "                ('" + description + "'," + location + "," + type + "," + change + ",\n" +
-                    "                (SELECT id from Pets\n" +
-                    "                WHERE name = '" + pet + "'),\n" +
+                    "                (?,?,?,?,\n" +
+                    "                (SELECT p.id from Pets AS p, users as u\n" +
+                    "                WHERE name = ? AND p.owner_id = u.id AND u.username = ? LIMIT 1),\n" +
                     "                (SELECT id from Users\n" +
-                    "                WHERE username = '" + doctor + "'),'" + time + "',\n" +
-                    "                'Pending');");
+                    "                WHERE username = ?),?,\n" +
+                    "                'Pending');";
         }else{
-            st.execute("INSERT INTO\n" +
+            sql = "INSERT INTO\n" +
                     "                    appointments\n" +
                     "                (description,loc,is_emergency,changeable,pet_id,preferred_doctor_id,datetime,status,pet_status)\n" +
                     "                VALUES\n" +
-                    "                ('" + description + "'," + location + "," + type + "," + change + ",\n" +
-                    "                (SELECT id from Pets\n" +
-                    "                WHERE name = '" + pet + "'),\n" +
+                    "                (?,?,?,?,\n" +
+                    "                (SELECT p.id from Pets AS p, users as u\n" +
+                    "                WHERE name = ? AND p.owner_id = u.id AND u.username = ? LIMIT 1),\n" +
                     "                (SELECT id from Users\n" +
-                    "                WHERE username = '" + doctor + "'),'" + time + "',\n" +
-                    "                'Pending', 'Checked');");
+                    "                WHERE username = ?),?,\n" +
+                    "                'Pending', 'Checked');";
         }
+        st = conn.prepareStatement(sql);
+        st.setString(1,description);
+        st.setInt(2,location);
+        st.setInt(3,type);
+        st.setInt(4,change);
+        st.setString(5,pet);
+        st.setString(6,username);
+        st.setString(7,doctor);
+        st.setString(8,time);
         // 获得结果 集合
         // 关闭资源
+        st.executeUpdate();
         st.close();
         conn.close();
     }
 
-    public void acquire_info(ArrayList<String> pets,  ArrayList<String> doctors) throws SQLException {
+    public void acquire_info(ArrayList<String> pets,  ArrayList<String> doctors, ArrayList<String> locs) throws SQLException {
 
         // 注册驱动
         try {
@@ -239,31 +382,40 @@ public class New_Appointment extends AppCompatActivity {
         // 获得链接
         Connection conn = DriverManager.getConnection("jdbc:mysql://47.98.48.168:3306", "root", "root");
         // 得到操作数据库sql语句的对象Statement
-        Statement st = conn.createStatement();
+        PreparedStatement st = null;
         SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);
         // 执行
-        st.executeQuery("use test");
-        ResultSet rs = st.executeQuery("SELECT DISTINCT\n" +
+        String sql = "use test; ";
+        st = conn.prepareStatement(sql);
+        st.execute();
+        sql = "SELECT DISTINCT\n" +
                 "    name\n" +
                 "FROM\n" +
                 "    pets AS p,\n" +
                 "    users AS u\n" +
                 "WHERE\n" +
-                "    p.owner_id = u.id AND u.username = '"+username+"';");
+                "    p.owner_id = u.id AND u.username = ?;";
+        st = conn.prepareStatement(sql);
+        st.setString(1,username);
+        ResultSet rs = st.executeQuery();
         while (rs.next()) {
             pets.add(rs.getString(1));
         }
         rs.close();
-        ResultSet rs1 = st.executeQuery("SELECT DISTINCT\n" +
-                "    username\n" +
+        sql = "SELECT DISTINCT\n" +
+                "    username, loc\n" +
                 "FROM\n" +
-                "    users\n" +
+                "    users AS u,\n" +
+                "    employees AS e\n" +
                 "WHERE\n" +
-                "    is_customer = 0;");
+                "    is_customer = 0 AND u.ref_id = e.id;";
+        st = conn.prepareStatement(sql);
+        ResultSet rs1 = st.executeQuery();
         while (rs1.next()) {
 //            System.out.println(rs1.getString(1));
             doctors.add(rs1.getString(1));
+            locs.add(rs1.getString(2));
         }
         // 关闭资源
         rs1.close();

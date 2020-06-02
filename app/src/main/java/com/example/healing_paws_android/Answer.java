@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -54,30 +55,38 @@ public class Answer extends AppCompatActivity {
             // 获得链接
             Connection conn = DriverManager.getConnection("jdbc:mysql://47.98.48.168:3306", "root", "root");
             // 得到操作数据库sql语句的对象Statement
-            Statement st = conn.createStatement();
+            PreparedStatement st = null;
             SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
             String username = sharedPreferences.getString("username",null);
             // 执行
-            st.executeQuery("use test");
+            String sql = "use test;";
+            st = conn.prepareStatement(sql);
+            st.execute();
 
-            ResultSet rs = st.executeQuery("SELECT \n" +
+            sql = "SELECT \n" +
                     "    body\n" +
                     "FROM\n" +
                     "    questions\n" +
                     "WHERE\n" +
-                    "    title = '"+title+"';");
+                    "    title =?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1,title);
+            ResultSet rs = st.executeQuery();
             while(rs.next()) {
                 Body.setText(rs.getString(1));
             }
 
             rs.close();
 
-            ResultSet rs1 = st.executeQuery("SELECT \n" +
+            sql = "SELECT \n" +
                     "    a.body\n" +
                     "FROM\n" +
                     "    answers AS a, questions AS q\n" +
                     "WHERE\n" +
-                    "    a.question_id = q.id AND q.title = '"+title+"';");
+                    "    a.question_id = q.id AND q.title = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1,title);
+            ResultSet rs1 = st.executeQuery();
             while(rs1.next()) {
                 Answer.setText(rs1.getString(1));
             }

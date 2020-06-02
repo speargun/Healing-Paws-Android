@@ -73,4 +73,17 @@
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="send_success">发送成功</string>
+    <string name="add">添加</string>
+    <string name="remove">删除</string>
+    <string name="remove_success">删除成功</string>
+    <string name="pet_name">宠物名称</string>
+    <string name="pet_age">宠物年龄</string>
+    <string name="pet_category">宠物类别</string>
+    <string name="doctor_empty">抱歉，这座城市目前没有医生。</string>
+    <string name="add_pet">添加宠物</string>
+    <string name="cat">猫</string>
+    <string name="dog">狗</string>
+    <string name="pet_name_invalid">无效宠物名</string>
+    <string name="age_invalid">无效年龄</string>
+    <string name="pet_name_duplicate">重复宠物名</string>
 </resources>

@@ -188,12 +188,12 @@ public class Register extends AppCompatActivity {
     }
 
     public static boolean isEmail(String email) {
-        String emailPattern = "[a-zA-Z0-9][a-zA-Z0-9._-]{2,16}[a-zA-Z0-9]@[a-zA-Z0-9]+.[a-zA-Z0-9]+";
+        String emailPattern = "[a-zA-Z0-9][a-zA-Z0-9._-]{0,16}[a-zA-Z0-9]@[a-zA-Z0-9]+.[a-zA-Z0-9]+";
         return Pattern.matches(emailPattern, email);
     }
 
     public static boolean isPhone(String mobiles) {
-        Pattern p = Pattern.compile("^[0-9]{8,13}$");
+        Pattern p = Pattern.compile("^[0-9]{7,13}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }

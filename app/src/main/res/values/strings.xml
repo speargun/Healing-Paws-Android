@@ -73,4 +73,18 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="send_success">Send Successful</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="remove_success">Remove Successful</string>
+    <string name="pet_name">Pet Name</string>
+    <string name="pet_age">Pet Age</string>
+    <string name="pet_category">Pet Category</string>
+    <string name="doctor_empty">Sorry, there is currently no doctor in selected city.</string>
+    <string name="add_pet">Add Pet</string>
+    <string name="cat">Cat</string>
+    <string name="dog">Dog</string>
+    <string name="pet_name_invalid">Invalid Pet Name</string>
+    <string name="age_invalid">Invalid Age</string>
+    <string name="pet_name_duplicate">Duplicate Pet Name</string>
+
 </resources>

@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -133,19 +134,25 @@ public class Check_appointment extends AppCompatActivity {
         // 获得链接
         Connection conn = DriverManager.getConnection("jdbc:mysql://47.98.48.168:3306", "root", "root");
         // 得到操作数据库sql语句的对象Statement
-        Statement st = conn.createStatement();
+        PreparedStatement st = null;
         SharedPreferences sharedPreferences = getSharedPreferences("Username", MODE_PRIVATE);
         String username = sharedPreferences.getString("username",null);
         // 执行
-        st.executeQuery("use test");
-        ResultSet rs = st.executeQuery("SELECT \n" +
+        String sql = "use test";
+        st = conn.prepareStatement(sql);
+        st.execute();
+
+        sql = "SELECT \n" +
                 "    name,datetime\n" +
                 "FROM\n" +
                 "    appointments AS a,\n" +
                 "    pets AS p,\n" +
                 "    users AS u\n" +
                 "WHERE\n" +
-                "    a.pet_id = p.id AND p.owner_id = u.id AND u.username = '"+username+"';");
+                "    a.pet_id = p.id AND p.owner_id = u.id AND u.username = ?;";
+        st = conn.prepareStatement(sql);
+        st.setString(1,username);
+        ResultSet rs = st.executeQuery();
         while (rs.next()) {
 //            System.out.println(rs1.getString(1));
             pets.add(rs.getString(1));
