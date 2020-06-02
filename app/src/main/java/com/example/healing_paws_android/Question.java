@@ -54,7 +54,8 @@ public class Question extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 qa=questionList.get(i);
                 Intent i2 = new Intent(Question.this,Answer.class);
-                i2.putExtra("question", qa);
+                i2.putExtra("title", qa);
+                startActivity(i2);
 
             }
         });
@@ -98,7 +99,7 @@ public class Question extends AppCompatActivity {
         st.executeQuery("use test");
         for(int id=0; id<=100;id++){
             ResultSet rs = st.executeQuery("SELECT \n" +
-                    "    *\n" +
+                    "    title\n" +
                     "FROM\n" +
                     "    questions AS q,\n" +
                     "    users AS u\n" +
@@ -139,7 +140,13 @@ public class Question extends AppCompatActivity {
             // 执行
             st.executeQuery("use test");
 
-            ResultSet rs1 = st.executeQuery("Select ");
+            ResultSet rs1 = st.executeQuery("Select id FROM users WHERE username =  '"+username+"';");
+            int user_id = Integer.parseInt(rs1.toString());
+            rs1.close();
+
+            st.execute("INSERT INTO Question (title, body, user_id) VALUES (" + t + "," + b + "," + user_id + ");" );
+            st.close();
+            conn.close();
 
         }
     }
