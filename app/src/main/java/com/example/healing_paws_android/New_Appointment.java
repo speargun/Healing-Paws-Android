@@ -68,18 +68,18 @@ public class New_Appointment extends AppCompatActivity {
         }
         i = 0;
         int j = 0;
+        int[] i_set = new int[doctorsList.size()];
         while(i<doctorsList.size()){
             if(locs[i].equals("1")) {
+                i_set[j] = i;
                 j++;
             }
             i++;
         }
         i = 0;
         final String[] doctors1 = new String[j];
-        while(i<doctorsList.size()) {
-            if(locs[i].equals("1")) {
-                doctors1[i] = doctorsList.get(i);
-            }
+        while(i<doctors1.length) {
+            doctors1[i] = doctorsList.get(i_set[i]);
             i++;
         }
         RadioButton beijing = findViewById(R.id.n_rb_beijing);
